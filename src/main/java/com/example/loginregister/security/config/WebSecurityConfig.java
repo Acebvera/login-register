@@ -21,9 +21,14 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
-	private final AppUserService appUserService = new AppUserService();
+	private AppUserService appUserService;
 	private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 	
+	public WebSecurityConfig(AppUserService appUserService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+		this.appUserService = appUserService;
+		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+	}
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests().antMatchers("/api/v*/registration/**").permitAll()
