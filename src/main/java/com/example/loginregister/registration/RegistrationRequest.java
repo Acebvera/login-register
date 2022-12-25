@@ -5,24 +5,24 @@ import java.util.Objects;
 public class RegistrationRequest {
 	//When the client sends a request capture
 	
-	private String firstName = "";
-	private String lastName = "";
+	private String name = "";
+	private String surname = "";
 	private String email = "";
 	private String password = "";
 	
-	public RegistrationRequest(String firstName, String lastName, String email, String password) {
-		this.firstName = firstName;
-		this.lastName = lastName;
+	public RegistrationRequest(String name, String surname, String email, String password) {
+		this.name = name;
+		this.surname = surname;
 		this.email = email;
 		this.password = password;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getName() {
+		return name;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public String getSurname() {
+		return surname;
 	}
 
 	public String getEmail() {
@@ -35,7 +35,7 @@ public class RegistrationRequest {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(email, firstName, lastName, password);
+		return Objects.hash(email, name, password, surname);
 	}
 
 	@Override
@@ -47,17 +47,17 @@ public class RegistrationRequest {
 		if (getClass() != obj.getClass())
 			return false;
 		RegistrationRequest other = (RegistrationRequest) obj;
-		return Objects.equals(email, other.email) && Objects.equals(firstName, other.firstName)
-				&& Objects.equals(lastName, other.lastName) && Objects.equals(password, other.password);
+		return Objects.equals(email, other.email) && Objects.equals(name, other.name)
+				&& Objects.equals(password, other.password) && Objects.equals(surname, other.surname);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("RegistrationRequest [firstName=");
-		builder.append(firstName);
-		builder.append(", lastName=");
-		builder.append(lastName);
+		builder.append("RegistrationRequest [name=");
+		builder.append(name);
+		builder.append(", surname=");
+		builder.append(surname);
 		builder.append(", email=");
 		builder.append(email);
 		builder.append(", password=");
@@ -65,6 +65,7 @@ public class RegistrationRequest {
 		builder.append("]");
 		return builder.toString();
 	}
+	
 	
 	
 }

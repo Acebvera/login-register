@@ -33,7 +33,7 @@ public class AppUser implements UserDetails{
 	)
 	private Long id;
 	private String name;
-	private String username;
+	private String surname;
 	private String email;
 	private String password;
 	@Enumerated(EnumType.STRING)
@@ -44,31 +44,18 @@ public class AppUser implements UserDetails{
 	public AppUser() {
 	}
 
-	public AppUser(String name, String username, String email, String password, AppUserRole appUserRole, Boolean locked,
-			Boolean enabled) {
+	public AppUser(String name, String surname, String email, String password, AppUserRole appUserRole) {
 		this.name = name;
-		this.username = username;
+		this.surname = surname;
 		this.email = email;
 		this.password = password;
 		this.appUserRole = appUserRole;
-		this.locked = locked;
-		this.enabled = enabled;
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		SimpleGrantedAuthority authority = new SimpleGrantedAuthority(appUserRole.name());
 		return Collections.singletonList(authority);
-	}
-
-	@Override
-	public String getPassword() {
-		return password;
-	}
-
-	@Override
-	public String getUsername() {
-		return username;
 	}
 
 	@Override
@@ -91,6 +78,12 @@ public class AppUser implements UserDetails{
 		return enabled;
 	}
 
+	@Override
+	public String getUsername() {
+		
+		return email;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -107,12 +100,28 @@ public class AppUser implements UserDetails{
 		this.name = name;
 	}
 
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
 	public String getEmail() {
 		return email;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public AppUserRole getAppUserRole() {
@@ -139,17 +148,9 @@ public class AppUser implements UserDetails{
 		this.enabled = enabled;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(appUserRole, email, enabled, id, locked, name, password, username);
+		return Objects.hash(appUserRole, email, enabled, id, locked, name, password, surname);
 	}
 
 	@Override
@@ -164,7 +165,9 @@ public class AppUser implements UserDetails{
 		return appUserRole == other.appUserRole && Objects.equals(email, other.email)
 				&& Objects.equals(enabled, other.enabled) && Objects.equals(id, other.id)
 				&& Objects.equals(locked, other.locked) && Objects.equals(name, other.name)
-				&& Objects.equals(password, other.password) && Objects.equals(username, other.username);
+				&& Objects.equals(password, other.password) && Objects.equals(surname, other.surname);
 	}
+
+	
 
 }
