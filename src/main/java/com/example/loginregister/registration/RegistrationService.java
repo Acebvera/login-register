@@ -12,7 +12,8 @@ public class RegistrationService {
 	private AppUserService appUserService;
 	private EmailValidator emailValidator;
 	
-	public RegistrationService(EmailValidator emailValidator) {
+	public RegistrationService(AppUserService appUserService, EmailValidator emailValidator) {
+		this.appUserService = appUserService;
 		this.emailValidator = emailValidator;
 	}
 	
