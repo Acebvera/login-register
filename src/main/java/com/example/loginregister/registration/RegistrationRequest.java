@@ -3,7 +3,6 @@ package com.example.loginregister.registration;
 import java.util.Objects;
 
 public class RegistrationRequest {
-	//When the client sends a request capture
 	
 	private String name = "";
 	private String surname = "";
