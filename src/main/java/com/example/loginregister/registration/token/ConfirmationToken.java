@@ -44,7 +44,7 @@ public class ConfirmationToken {
 			nullable = false,
 			name = "app_user_id"
 	)
-	private AppUser appUser; //Un usuario puede tener varias confirmaciones
+	private AppUser appUser; //Un usuario puede tener varios mensajes de confirmacion.
 	
 	public ConfirmationToken() {
 	}
