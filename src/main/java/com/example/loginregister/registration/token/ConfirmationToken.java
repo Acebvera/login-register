@@ -3,6 +3,7 @@ package com.example.loginregister.registration.token;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +13,7 @@ import javax.persistence.SequenceGenerator;
 
 import com.example.loginregister.appuser.AppUser;
 
+@Entity
 public class ConfirmationToken {
 	
 	
@@ -49,12 +51,10 @@ public class ConfirmationToken {
 	public ConfirmationToken() {
 	}
 	
-	public ConfirmationToken(String token, LocalDateTime createdAt, LocalDateTime expiresAt,
-			LocalDateTime confirmedAt, AppUser appUser) {
+	public ConfirmationToken(String token, LocalDateTime createdAt, LocalDateTime expiresAt, AppUser appUser) {
 		this.token = token;
 		this.createdAt = createdAt;
 		this.expiresAt = expiresAt;
-		this.confirmedAt = confirmedAt;
 		this.appUser = appUser;
 	}
 	

@@ -1,10 +1,16 @@
 package com.example.loginregister.appuser;
 
+import java.time.LocalDateTime;
+import java.util.UUID;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import com.example.loginregister.registration.token.ConfirmationToken;
+import com.example.loginregister.registration.token.ConfirmationTokenService;
 
 
 //Spring security
@@ -14,11 +20,13 @@ public class AppUserService implements UserDetailsService {
 	private final static String USER_NOT_FOUND = "User with email %s not found";
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 	private AppUserRepository appUserRepository;
+	private ConfirmationTokenService confirmationTokenService;
 
 	
-	public AppUserService (AppUserRepository appUserRepository) {
+	public AppUserService (AppUserRepository appUserRepository, ConfirmationTokenService confirmationTokenService) {
 		this.appUserRepository = appUserRepository;
 		this.bCryptPasswordEncoder = new BCryptPasswordEncoder();
+		this.confirmationTokenService = confirmationTokenService;
 	}
 	
 	@Override
@@ -39,9 +47,13 @@ public class AppUserService implements UserDetailsService {
 		//Guarda nuevo usuario en la base de datos
 		appUserRepository.save(appUser);
 		
-		//TODO: Send confirmation token
+		String token = UUID.randomUUID().toString();
+		ConfirmationToken confirmationToken = new ConfirmationToken(token, LocalDateTime.now(), LocalDateTime.now().plusMinutes(15), appUser);
+		confirmationTokenService.saveConfirmationToken(confirmationToken);
 		
-		return "Funciona";
+		//TODO: enviar email
+		
+		return token;
 	}
 
 }
