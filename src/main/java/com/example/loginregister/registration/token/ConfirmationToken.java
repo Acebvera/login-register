@@ -78,5 +78,9 @@ public class ConfirmationToken {
 		return confirmedAt;
 	}
 	
+	public AppUser getAppUser() {
+		return appUser;
+	}
+	
 	
 }

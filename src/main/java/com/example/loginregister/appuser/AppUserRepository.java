@@ -11,4 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 public interface AppUserRepository extends JpaRepository<AppUser, Long>{
 	//Find user by email
 	Optional<AppUser> findByEmail(String email);
+
+	int enableAppUser(String email);
 }
